@@ -12,10 +12,10 @@ import cake9 from './cakes/pinkcake1.PNG'
 import cake10 from './cakes/redglazed.jpg'
 import cake11 from './cakes/turquoise.PNG'
 import cake12 from './cakes/pinkcake2.PNG'
-import heart from './cakes/heart.png'
-import user from './cakes/user.png'
-import location from './cakes/location.png'
 import axios from 'axios'
+import {Button} from 'antd'
+import { ShoppingFilled,HeartFilled,UserOutlined } from '@ant-design/icons';
+// import 'antd/dist/antd.css';
 
 class Home extends Component {
     state = {
@@ -64,9 +64,9 @@ class Home extends Component {
                             <div className="title">{cake.title}</div>
                             <p className="description">{cake.paragraph}</p>
                             <div className="icons">
-                                <img style={{ width: 'auto', height: '20px' }} src={heart} onClick={() => this.checkLike(index)}/>
-                                <img style={{ width: 'auto', height: '20px' }} src={user} />
-                                <img style={{ width: 'auto', height: '20px' }} src={location} onClick={() => this.checkOutItem(index)}/>
+                                <Button   icon={<HeartFilled style={{fontSize:'25px'}}/>} style={{color:'maroon',background:'white',border:'none'}} onClick={() => this.checkLike(index)}></Button>
+                                <Button  icon={<ShoppingFilled style={{fontSize:'25px'}}/>} style={{color:'maroon',background:'white',border:'none'}} onClick={() => this.checkOutItem(index)}></Button>
+                                <Button  icon={<UserOutlined style={{fontSize:'25px'}}/>} style={{color:'maroon',border:'none',background:'white'}}></Button>
                             </div>
                         </div>)}
                     </div>

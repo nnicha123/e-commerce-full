@@ -36,7 +36,7 @@
 }
 .products{
     min-height: 500px;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(238, 225, 225);
     /* background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%); */
     display: flex;
     justify-content: center;
@@ -109,4 +109,13 @@
 .favouriteEnd:hover{
     opacity: 0.6;
     cursor: pointer;
+}
+
+Button:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+Button:focus{
+    outline: none;
+    opacity: 0.3;
 }
