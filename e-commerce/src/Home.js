@@ -15,6 +15,7 @@ import cake12 from './cakes/pinkcake2.PNG'
 import heart from './cakes/heart.png'
 import user from './cakes/user.png'
 import location from './cakes/location.png'
+import axios from 'axios'
 
 class Home extends Component {
     state = {
@@ -23,34 +24,26 @@ class Home extends Component {
             { image: cake2,title: 'The pink jolly cupcake',paragraph: 'The most delicate pink cupcake ever made!',price:20},
             { image: cake3,title: 'The chocolate drip cake',paragraph: 'Topped with sour raspberries and 3 icecream layers',price:25},
             { image: cake4,title: 'The icecream cone cake',paragraph: 'Sprinkled with joy and dripping with delicious jam',price:12},
-            { image: cake5,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:13},
-            { image: cake6,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:10},
-            { image: cake7,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:23},
-            { image: cake8,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:43},
-            { image: cake9,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:52},
-            { image: cake10,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:13},
-            { image: cake11,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:34},
-            { image: cake12,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:40},
+            { image: cake5,title: 'The blue wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:13},
+            { image: cake6,title: 'The light pink cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:10},
+            { image: cake7,title: 'Colorful Macaroons',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:23},
+            { image: cake8,title: 'Soft Orange Cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:43},
+            { image: cake9,title: 'Strawberry pink',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:52},
+            { image: cake10,title: 'The Red-glazed cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:13},
+            { image: cake11,title: 'Ocean cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:34},
+            { image: cake12,title: 'The Pink drip cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:40},
         ],
         liked: [{ image: cake12,title: 'The black wedding cake',paragraph: 'The most beautiful cake ever with chocolate and rose topped',price:12},],
-        likedBefore: false,
         checkOut:[]
     }
     checkLike = (index) => {
-        this.setState({ likedBefore: true })
         const likedItem = this.state.cakes[index]
-        const totalLiked = [...this.state.liked]
-        this.setState({ liked: [...this.state.liked, likedItem] })
         console.log(likedItem)
+        axios.post('http://localhost:5000/api/favourites',likedItem).then(res => console.log(res))
     }
     checkOutItem = (index) => {
         const newCheckout = this.state.cakes[index]
-        this.setState({checkOut:[...this.state.checkOut,newCheckout]})
-    }
-    removeLike = (index) => {
-        const newLikes = [...this.state.liked].filter((el,idx) => idx !== index)
-        console.log(newLikes)
-        this.setState({liked:newLikes})
+        axios.post('http://localhost:5000/api/checkouts',newCheckout).then(res => console.log(res))
     }
 
     render() {
@@ -71,7 +64,7 @@ class Home extends Component {
                             <div className="title">{cake.title}</div>
                             <p className="description">{cake.paragraph}</p>
                             <div className="icons">
-                                <img style={{ width: 'auto', height: '20px' }} src={heart} onClick={() => this.checkLike(index)} />
+                                <img style={{ width: 'auto', height: '20px' }} src={heart} onClick={() => this.checkLike(index)}/>
                                 <img style={{ width: 'auto', height: '20px' }} src={user} />
                                 <img style={{ width: 'auto', height: '20px' }} src={location} onClick={() => this.checkOutItem(index)}/>
                             </div>
@@ -81,20 +74,6 @@ class Home extends Component {
                 <div className="advertisementText" style={{ textAlign: 'center' }}>
                     Hope you enjoyed the page!
                 </div>
-                <button onClick={() => this.props.data.changeLikes(this.state.liked)}>Click to update favourites</button>
-                <button onClick={() => this.props.checkOut.changeCheckOut(this.state.checkOut)}>Click to update checkout</button>
-                {(this.state.likedBefore) && <div className="temporaryDiv">
-                    <h3>Favourites</h3>
-                    {this.state.liked.map((el,index) => <div className="arrangeLikes">
-                        <div className="favouriteStart">
-                            <img src={el.image} alt="cake" />
-                            <div>{el.title}</div>
-                        </div>
-                        <div className="favouriteEnd" onClick={() => this.removeLike(index)}>
-                            <div>Remove</div>
-                        </div>
-                    </div>)}
-                </div>}
             </div>
         )
     }

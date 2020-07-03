@@ -58,3 +58,9 @@
     opacity: 0.6;
     cursor: pointer;
 }
+.arrangeLikes.total{
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    /* background: red; */
+}
