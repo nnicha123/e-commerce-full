@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const cors = require('cors')
 const bodyParser = require('body-parser')
+const cors = require('cors')
+
 
 mongoose.connect('mongodb://localhost/ecommerce',{ useUnifiedTopology: true, 
 useNewUrlParser: true },() => console.log('Connected to mongodb'))
